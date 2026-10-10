@@ -4,7 +4,7 @@ from PIL import Image
 
 
 #title
-st.title("Note Summary and Quiz Generator")
+st.title("Note Summary and Quiz Generator",anchor=False)
 st.markdown("Upload upto 3 images to generate Note summary and Quizes")
 st.divider()
 
@@ -17,6 +17,12 @@ with st.sidebar:
         type=["jpg","jpeg",'png'],
         accept_multiple_files = True,
     )
+
+    pil_images = []
+    for img in images:
+        pil_img = Image.open(img)
+        pil_images.append(pil_img)
+
 
     if images:
         if len(images) > 3:
@@ -38,6 +44,7 @@ with st.sidebar:
         index = None,
     )
     pressed = st.button("Click the button to initiate AI",type="primary")
+
 st.markdown("""
     <style>
     /* Streamlit-এর toast কন্টেইনারকে টার্গেট করে পজিশন বদলানো */
@@ -65,11 +72,12 @@ if pressed:
 
         #Note
         with st.container(border=True):
-            st.subheader("Your note")
+            st.subheader("Your note",anchor=False)
 
             #the portion below will be replaced by API Call
-            generated_notes = note_generator(images)
-            st.text(generated_notes)
+            with st.spinner("AI is writing notes for you dude..!"):
+                generated_notes = note_generator(pil_images)
+                st.markdown(generated_notes)
 
         #Audio transcript
         with st.container(border=True):
