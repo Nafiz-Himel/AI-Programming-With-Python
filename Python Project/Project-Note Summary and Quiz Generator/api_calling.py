@@ -1,6 +1,7 @@
 from google import genai
 from dotenv import load_dotenv
-import os
+import os, io
+from gtts import gTTS
 
 # env file loading
 load_dotenv()
@@ -25,3 +26,12 @@ def note_generator(images):
     )
 
     return response.text
+
+def audio_transcription(text):
+    speech = gTTS(text,lang='en',slow=False)
+
+    # speech.save("welcome.mp3")
+    audio_buffer = io.BytesIO()
+    speech.write_to_fp(audio_buffer)
+
+    return audio_buffer

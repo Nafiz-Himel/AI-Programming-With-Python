@@ -1,6 +1,7 @@
 import streamlit as st
-from api_calling import note_generator
+from api_calling import note_generator,audio_transcription
 from PIL import Image
+
 
 
 #title
@@ -75,7 +76,7 @@ if pressed:
             st.subheader("Your note",anchor=False)
 
             #the portion below will be replaced by API Call
-            with st.spinner("AI is writing notes for you dude..!"):
+            with st.spinner("AI is writing notes for you dude.."):
                 generated_notes = note_generator(pil_images)
                 st.markdown(generated_notes)
 
@@ -84,7 +85,9 @@ if pressed:
             st.subheader("Audio Transcription")
         
             #the portion below will be replaced by API Call
-            st.text("Audio transcript will be shwon here...!")
+            with st.spinner("AI is geenrating audio for you.."):
+                audio_transcript = audio_transcription(generated_notes)
+                st.audio(audio_transcript)
 
         #Quiz
         with st.container(border=True):
