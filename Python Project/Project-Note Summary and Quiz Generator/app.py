@@ -1,5 +1,5 @@
 import streamlit as st
-from api_calling import note_generator,audio_transcription
+from api_calling import note_generator,audio_transcription,quiz_generator
 from PIL import Image
 
 
@@ -91,6 +91,7 @@ if pressed:
                 generated_notes = generated_notes.replace("*","")
                 generated_notes = generated_notes.replace("-","")
                 generated_notes = generated_notes.replace("`","")
+                generated_notes = generated_notes.replace("$","")
 
                 
                 audio_transcript = audio_transcription(generated_notes)
@@ -101,4 +102,6 @@ if pressed:
             st.subheader(f"Quiz ({selected_option}) Difficulty")
         
             #the portion below will be replaced by API Call
-            st.text("Quiz will be shwon here...!")
+            with st.spinner("AI is generating the quizzes.."):
+                quizzes = quiz_generator(pil_images,selected_option)
+                st.markdown(quizzes)

@@ -35,3 +35,14 @@ def audio_transcription(text):
     speech.write_to_fp(audio_buffer)
 
     return audio_buffer
+
+def quiz_generator(images,difficulty):
+    prompt = f"Generate 3 quizzes in Bangla based on the {difficulty}. Make sure to add markdown to differentiate the options. And correct answer too"
+    
+    response = client.models.generate_content(
+        model="gemini-3-flash-preview",
+        # model="gemini-3.8-flash",
+        contents=[images,prompt],
+    )
+    
+    return response.text
