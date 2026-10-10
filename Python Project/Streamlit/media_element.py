@@ -9,7 +9,7 @@ st.image("Images/WhatsApp Image 2026-10-09 at 7.49.35 PM (1).jpeg")
 st.image("https://images.unsplash.com/photo-1506744038136-46273834b3fb")
 
 st.divider()
-images = st.file_uploader("Enter ur image: ",
+images = st.file_uploader("Enter ur image: (at max 2)",
                   type=['jpg','png','jpeg'],
                   accept_multiple_files = True,
                   )
@@ -18,6 +18,8 @@ print(type(images))
 
 
 if images:
+    if (len(images) > 2):
+        st.warining("U uploaded more than 2 imges..!")
     cols = st.columns(len(images))
 
     for i,per_image in enumerate(images):
