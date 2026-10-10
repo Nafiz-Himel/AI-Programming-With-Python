@@ -86,6 +86,13 @@ if pressed:
         
             #the portion below will be replaced by API Call
             with st.spinner("AI is geenrating audio for you.."):
+                # clearing the markdown
+                generated_notes = generated_notes.replace("#","")
+                generated_notes = generated_notes.replace("*","")
+                generated_notes = generated_notes.replace("-","")
+                generated_notes = generated_notes.replace("`","")
+
+                
                 audio_transcript = audio_transcription(generated_notes)
                 st.audio(audio_transcript)
 
