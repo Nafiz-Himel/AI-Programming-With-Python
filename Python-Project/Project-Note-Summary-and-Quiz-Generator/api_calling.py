@@ -20,7 +20,11 @@ def note_generator(images):
     make sure to add necessary markdown to differentiate different section"""
 
     response = client.models.generate_content(
+<<<<<<< HEAD
         model="Gemini 3.6 Flash",
+=======
+        model="gemini-3.5-flash-lite",
+>>>>>>> c9f3f2bb5e70a362cb86ea5e2d08c6c2331a1f3f
         contents=[images,prompt],
     )
 
@@ -39,7 +43,11 @@ def quiz_generator(images,difficulty):
     prompt = f"Generate 3 quizzes in Bangla based on the {difficulty}. Make sure to add markdown to differentiate the options. And correct answer too"
     
     response = client.models.generate_content(
+<<<<<<< HEAD
         model="Gemini 3.6 Flash",
+=======
+        model="gemini-3.5-flash-lite",
+>>>>>>> c9f3f2bb5e70a362cb86ea5e2d08c6c2331a1f3f
         contents=[images,prompt],
     )
     
